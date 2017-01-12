@@ -1,0 +1,53 @@
+application: srinidhisample
+version: 10
+runtime: php55
+api_version: 1
+
+skip_files:
+  - Resources/*.*
+
+handlers:
+- url: /
+  script: index.html
+
+- url: /index\.html
+  script: index.html
+
+- url: /legislator_carousel_page\.html
+  script: legislator_carousel_page.html
+
+- url: /helloworld\.php
+  script: helloworld.php
+
+- url: /test\.php
+  script: test.php
+
+- url: /hw9\.php
+  script: hw9.php
+
+- url: /style\.less
+  script: style.less
+
+- url: /style\.css
+  script: style.css
+  
+- url: /style_2\.css
+  script: style_2.css
+
+- url: /bootstrap\.css
+  script: bootstrap.css
+  
+- url: /dirPagination\.tpl\.html
+  script: dirPagination.tpl.html
+
+- url: /script\.js
+  script: script.js
+
+- url: /example\.js
+  script: example.js
+
+- url: /static
+  static_dir: static
+
+- url: /.*
+  script: helloworld.php

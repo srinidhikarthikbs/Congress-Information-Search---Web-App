@@ -1,0 +1,578 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+}
+
+body {
+    margin: 0 auto;
+    background: #ededed;
+}
+
+.page_header {
+    height: 45px;
+    width: 100%;
+    background: white;
+    position: fixed;
+    z-index: 10;
+    .menu_toggle {
+        background: none;
+        border: none;
+        float: left;
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 20px;
+        .menu_toggle_button {
+            color: black;
+            padding: 10px;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    .sunlight_logo {
+        text-decoration: none;
+        color: black;
+        display: inline-block;
+        text-align: center;
+        margin-top: 8px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+        -webkit-transform: translate(-50%, 0);
+        -o-transform: translate(-50%, 0);
+        -moz-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+        .logo {
+            height: 25px;
+        }
+        .logo_text {
+            display: inline-block;
+            line-height: 30px;
+            font-size: 15px;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+    }
+}
+
+#wrapper {
+    padding-left: 0px;
+    padding-top: 45px;
+    transition: all .4s ease 0s;
+}
+
+#wrapper.active {
+    padding-left: 200px;
+    padding-top: 45px;
+}
+
+#wrapper.active #sidebar-wrapper {
+    left: 200px;
+}
+
+#sidebar-wrapper {
+    margin-left: -200px;
+    left: 0px;
+    width: 200px;
+    background: #222;
+    z-index: 10;
+    position: fixed;
+    height: 100%;
+    transition: all .4s ease 0s;
+    #sidebar-wrapper:first-child,
+    button:first-child {
+        margin-top: 30px;
+    }
+    button {
+        color: #999999;
+        display: block;
+        text-align: left;
+        padding-left: 35px;
+        text-decoration: none;
+        height: 50px;
+        width: 200px;
+        background: none;
+        border: none;
+        -webkit-transition: background .5s;
+        -moz-transition: background .5s;
+        -o-transition: background .5s;
+        -ms-transition: background .5s;
+        transition: background .5s;
+        &:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+        }
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            outline: none;
+            border: none;
+        }
+    }
+}
+
+.sidebar-nav {
+    display: block;
+    float: left;
+    width: 200px;
+    list-style: none;
+    margin-left: 0px;
+    .sidebar-nav:first-child,
+    li:first-child {
+        margin-top: 30px;
+    }
+}
+
+.sidebar-nav li {
+    line-height: 40px;
+    text-indent: 20px;
+}
+
+.sidebar-nav li button {
+    color: #999999;
+    display: block;
+    float: left;
+    text-align: left;
+    padding-left: 35px;
+    text-decoration: none;
+    width: 200px;
+    background: none;
+    border: none;
+    -webkit-transition: background .5s;
+    -moz-transition: background .5s;
+    -o-transition: background .5s;
+    -ms-transition: background .5s;
+    transition: background .5s;
+}
+
+.sidebar-nav li button:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.sidebar-nav li button:active,
+.sidebar-nav li button:focus {
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+#page-content-wrapper {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    height: auto;
+    z-index: 0;
+    .legislators_section,
+    .bills_section,
+    .committees_section,
+    .favorites_section {
+        .heading_rule {
+            height: 2px;
+            background: #dedede;
+            width: 100%;
+        }
+        .tab_section {
+            margin-top: 15px;
+        }
+        .tab_container {
+            padding: 20px;
+            .table_and_header_wrapper {
+                .search_bar,
+                .favorite_search_bar {
+                    padding-top: 10px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    background: #ededed;
+                    height: 40px;
+                    .heading,
+                    .favorite_heading {
+                        display: inline-block;
+                    }
+                    .state_selection {
+                        float: right;
+                    }
+                }
+            }
+        }
+        .main_table {
+            margin: 20px;
+            .legislators_chamber {
+                margin-right: 5px;
+            }
+        }
+    }
+    .table_and_header_wrapper {
+        border: 1px solid;
+        border-color: #dedede;
+        border-radius: 5px;
+    }
+}
+
+.view_details_header {
+    margin-top: 5px;
+    .view_details_back_button {
+        display: inline;
+        background: none;
+        padding: 5px;
+        border: 1px solid #dedede;
+        font-size: 25px;
+        float: left;
+        margin-top: 3px;
+        margin-left: 10px;
+        width: 35px;
+        height: 35px;
+    }
+    .view_details_heading {
+        display: inline-block;
+        margin: 0px;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+    .view_details_favorite_button {
+        display: inline;
+        background: none;
+        padding: 5px;
+        border: 1px solid rgb(237, 237, 237);
+        background: none;
+        font-size: x-large;
+        float: right;
+        margin-top: 5px;
+        margin-right: 10px;
+    }
+}
+
+.legislator_view_details {
+    .legislator_details {
+        .legislator_primary_details {
+            .legislator_primary_details_image {
+                min-height: 200px;
+                .legislator_img {
+                    height: 180px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    -webkit-transform: translate(-50%, -50%);
+                    -moz-transform: translate(-50%, -50%);
+                    -ms-transform: translate(-50%, -50%);
+                    -o-transform: translate(-50%, -50%);
+                }
+                .favorites_legislator_img {
+                    height: 30px;
+                }
+            }
+            .legislator_primary_details_text {
+                .view_details_name {}
+                .view_details_email {
+                    white-space: pre-wrap;
+                    white-space: -moz-pre-wrap;
+                    white-space: -pre-wrap;
+                    white-space: -o-pre-wrap;
+                    word-wrap: break-word;
+                }
+                .view_details_chamber {}
+                .view_details_phone {
+                    text-decoration: none;
+                }
+                .view_details_party {
+                    width: 20px;
+                    height: 20px;
+                    float: left;
+                    margin-right: 5px;
+                }
+            }
+        }
+        .legislator_other_details {
+            .view_details_start_term {}
+            .view_details_end_term {}
+            .view_details_term {}
+            .view_details_office {}
+            .view_details_state {}
+            .view_details_fax {
+                text-decoration: none;
+            }
+            .view_details_birthday {
+                text-decoration: none;
+            }
+            .view_details_social_links {
+                .view_details_social_links_website {
+                    width: 40px;
+                    margin-right: 15px;
+                }
+                .view_details_social_links_facebook {
+                    width: 40px;
+                    margin-right: 15px;
+                }
+                .view_details_social_links_twitter {
+                    width: 40px;
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+    .legislator_bills_committees {
+        .legislator_committees {}
+        .legislator_bills {}
+    }
+}
+
+.grey_line {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    height: 1px;
+    width: 100%;
+    background: #dedede;
+}
+
+.favorites_party {
+    width: 20px;
+}
+
+.favorites_legislator_img {
+    height: 30px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.bill_pdf_wrapper {
+    padding: 20px;
+    .bill_pdf {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.committees_favorite_button {
+    // padding: 5px;
+    // border: 1px solid rgb(237, 237, 237);
+    // background: none;
+    // width: 30px;
+    font-size: 20px;
+    // color:white;
+    // text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.favorite_trash_button {
+    padding: 5px;
+    border: 0px;
+    background: none;
+    width: 20px;
+}
+
+.legislator_committees_mobile,
+.legislator_bills_mobile {
+    //max-height: 0px;
+}
+
+.rating {
+    //unicode-bidi: bidi-override;
+    //direction: rtl;
+}
+
+.rating> span {
+    position: relative;
+    font-size: 30px;
+}
+
+// .rating> span:hover:before,
+// .rating> span:hover~ span:before {
+//     content: '\2605';
+//     font-size: 30px;
+//     position: absolute;
+// }
+//media queries
+@media only screen and (max-width: 767px) {
+    .page_header {
+        .menu_toggle {
+            margin-left: 12px;
+        }
+    }
+    #wrapper.active {
+        padding-left: 55px;
+        padding-top: 45px;
+    }
+    #wrapper.active #sidebar-wrapper {
+        left: 55px;
+    }
+    #sidebar-wrapper {
+        margin-left: -55px;
+        left: 0px;
+        width: 55px;
+        background: #222;
+        position: fixed;
+        height: 100%;
+        transition: all .4s ease 0s;
+        button {
+            padding-left: 16px;
+            position: relative;
+            height: 50px;
+            color: #999999;
+            display: block;
+            text-align: left;
+            text-decoration: none;
+            width: 100%;
+            background: none;
+            border: none;
+            -webkit-transition: background .5s;
+            -moz-transition: background .5s;
+            -o-transition: background .5s;
+            -ms-transition: background .5s;
+            transition: background .5s;
+            &:hover {
+                color: #fff;
+                background: rgba(255, 255, 255, 0.2);
+                text-decoration: none;
+            }
+            &:active,
+            &:focus {
+                text-decoration: none;
+                outline: none;
+                border: none;
+            }
+            .navbar-options-text {
+                display: none;
+            }
+        }
+    }
+    .sidebar-nav {
+        display: block;
+        float: left;
+        width: 100%;
+        list-style: none;
+        margin-left: 0px;
+        .sidebar-nav:first-child,
+        li:first-child {
+            margin-top: 15px;
+        }
+    }
+    .sidebar-nav li {
+        line-height: 40px;
+        text-indent: 20px;
+    }
+    .sidebar-nav li button {
+        padding-left: 0px;
+        position: relative;
+        height: 40px;
+        color: #999999;
+        display: block;
+        float: left;
+        text-align: left;
+        margin-left: 0px;
+        text-decoration: none;
+        width: 55px;
+        background: none;
+        border: none;
+        -webkit-transition: background .5s;
+        -moz-transition: background .5s;
+        -o-transition: background .5s;
+        -ms-transition: background .5s;
+        transition: background .5s;
+    }
+    .sidebar-nav li button:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+    }
+    .sidebar-nav li button:active,
+    .sidebar-nav li button:focus {
+        text-decoration: none;
+        outline: none;
+        border: none;
+    }
+    .navbar-options-text {
+        display: none;
+    }
+    #page-content-wrapper {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 30px;
+        height: auto;
+        z-index: 0;
+    }
+    .search_bar {
+        min-height: 50px;
+        .state_selection {
+            max-width: 100px;
+            margin-top: 5px;
+        }
+        .heading {
+            max-width: 100px;
+        }
+    }
+    .legislator_other_details_heading {
+        display: none;
+    }
+    .legislator_table_headings,
+    .bill_columns_mobile,
+    .committees_columns_mobile {
+        display: none;
+    }
+    #page-content-wrapper .legislators_section .tab_container,
+    #page-content-wrapper .bills_section .tab_container,
+    #page-content-wrapper .committees_section .tab_container,
+    #page-content-wrapper .favorites_section .tab_container {
+        padding: 10px;
+    }
+}
+
+@media only screen and (max-width: 359px) {
+    #page-content-wrapper .legislators_section .tab_container,
+    #page-content-wrapper .bills_section .tab_container,
+    #page-content-wrapper .committees_section .tab_container,
+    #page-content-wrapper .favorites_section .tab_container {
+        padding: 5px;
+    }
+    #page-content-wrapper .legislators_section .tab_container .table_and_header_wrapper .search_bar,
+    #page-content-wrapper .bills_section .tab_container .table_and_header_wrapper .search_bar,
+    #page-content-wrapper .committees_section .tab_container .table_and_header_wrapper .search_bar {
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background: #ededed;
+        height: 70px;
+        text-align: center;
+        .heading {
+            //display: inline-block;
+            //display: block;
+            float: left;
+            //max-width: 100%;
+            max-width: 90px;
+        }
+        .state_selection {
+            float: right;
+            //float: none;
+            width: 90px;
+        }
+    }
+    .page_header {
+        height: 35px;
+        .menu_toggle {
+            margin-top: 2px;
+        }
+        .sunlight_logo {
+            margin-top: 5px;
+            .logo {
+                height: 20px;
+            }
+            .logo_text {
+                line-height: 25px;
+                font-size: 12px;
+                font-weight: bold;
+            }
+        }
+    }
+    #wrapper {
+        padding-top: 35px;
+    }
+    #wrapper.active {
+        padding-top: 35px;
+    }
+}
