@@ -1,12 +1,7 @@
 <?php 
-// error_reporting(0);
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 header('Content-Type: application/json');
 ?>
 <?php
-//$domain = "congress.api.sunlightfoundation.com";
 $domain = "104.198.0.197:8080";
 if(isset($_GET["initial_request"]))
     echo initial_request();
@@ -81,12 +76,12 @@ function only_committees(){
     }
     return $comm;
 }
-//consider writing separate functions for bills and committees (depending on time)
+
 if(isset($_GET["bioguide_id"]))
     echo legislator_bills_committees();
 function legislator_bills_committees(){
     global $domain;
-    $results=array(); //0-bills 1-committees, although the pdf exists parameter is optional - think about that
+    $results=array();
     $results[0] = json_decode(file_get_contents("http://".$domain."/bills?".http_build_query(array("apikey"=>"a9050b51c0f14e67a31fe2f6d3f64bc4", "per_page"=>"5", "sponsor_id"=>$_GET["bioguide_id"]))));
     $results[1] = json_decode(file_get_contents("http://".$domain."/committees?".http_build_query(array("apikey"=>"a9050b51c0f14e67a31fe2f6d3f64bc4", "per_page"=>"5", "member_ids"=>$_GET["bioguide_id"]))));
     return json_encode($results);
@@ -105,78 +100,4 @@ function bioguide_id_committees(){
     global $domain;
     return file_get_contents("http://".$domain."/committees?".http_build_query(array("apikey"=>"a9050b51c0f14e67a31fe2f6d3f64bc4", "per_page"=>"5", "member_ids"=>$_GET["bioguide_id_committees"])));
 }
-/*
-if(isset($_GET["operation"])){
-    switch ($_GET["operation"]) {
-        case 'legislators':
-        echo getLegislators();
-        break;
-
-        case 'committees':
-        echo getCommittees();
-        break;
-        
-        case 'bills':
-        echo getBills();
-        break;
-        
-        default:
-        $msg = array("err"=>"invalid input");
-        echo json_encode($msg);
-        break;
-    }
-}
-else {
-    $msg = array("err"=>"invalid input");
-    echo json_encode($msg);
-}
-
-function getLegislators(){
-    if(isset($_GET["bills_bioguide_id"])){
-        $apiURL = "http://congress.api.sunlightfoundation.com/bills?";
-        $params = array("apikey"=>"a9050b51c0f14e67a31fe2f6d3f64bc4", "per_page"=>"5", "sponsor_id"=>$_GET["bills_bioguide_id"]);
-        $response = file_get_contents($apiURL.http_build_query($params));
-        if($decoded_json = json_decode($response)){
-            return $response;
-        }
-        else return json_encode(array("err"=>"server error from legislators"));
-    }
-    if(isset($_GET["committees_bioguide_id"])){
-        $apiURL = "http://congress.api.sunlightfoundation.com/committees?";
-        $params = array("apikey"=>"a9050b51c0f14e67a31fe2f6d3f64bc4", "per_page"=>"5", "member_ids"=>$_GET["committees_bioguide_id"]);
-        $response = file_get_contents($apiURL.http_build_query($params));
-        if($decoded_json = json_decode($response)){
-            return $response;
-        }
-        else return json_encode(array("err"=>"server error from legislators"));
-    }
-    $apiURL = "http://congress.api.sunlightfoundation.com/legislators?";
-    $params = array("apikey"=>"a9050b51c0f14e67a31fe2f6d3f64bc4", "per_page"=>"all");
-    $response = file_get_contents($apiURL.http_build_query($params));
-    if($decoded_json = json_decode($response)){
-        return $response;
-    }
-    else return json_encode(array("err"=>"server error from legislators"));
-}
-
-function getBills(){
-    $apiURL = "http://congress.api.sunlightfoundation.com/bills?";
-    $params = array("apikey"=>"a9050b51c0f14e67a31fe2f6d3f64bc4", "per_page"=>"50");
-    $response = file_get_contents($apiURL.http_build_query($params));
-    if($decoded_json = json_decode($response)){
-        return $response;
-    }
-    else return json_encode(array("err"=>"server error from bills"));
-}
-
-function getCommittees(){
-    $apiURL = "http://congress.api.sunlightfoundation.com/committees?";
-    $params = array("apikey"=>"a9050b51c0f14e67a31fe2f6d3f64bc4", "per_page"=>"all");
-    $response = file_get_contents($apiURL.http_build_query($params));
-    if($decoded_json = json_decode($response)){
-        return $response;
-    }
-    else return json_encode(array("err"=>"server error from committees"));
-}
-*/
 ?>
